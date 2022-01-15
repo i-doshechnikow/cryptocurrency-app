@@ -8,8 +8,18 @@ const { Title } = Typography;
 
 const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery();
-  console.log("isFetching :>> ", isFetching);
-  console.log("data :>> ", data);
+
+  if (isFetching) return "Loading...";
+
+  let globalStats = data?.data?.stats;
+
+  const {
+    total,
+    totalExchanges,
+    totalMarketCap,
+    total24hVolume,
+    totalMarkets,
+  } = globalStats;
 
   return (
     <>
@@ -18,19 +28,19 @@ const Homepage = () => {
       </Title>
       <Row>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={5} />
+          <Statistic title="Total Cryptocurrencies" value={total} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Exchanges" value={5} />
+          <Statistic title="Total Exchanges" value={totalExchanges} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Market Cap" value={5} />
+          <Statistic title="Total Market Cap" value={totalMarketCap} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total 24h Volume" value={5} />
+          <Statistic title="Total 24h Volume" value={total24hVolume} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Markets" value={5} />
+          <Statistic title="Total Markets" value={totalMarkets} />
         </Col>
       </Row>
     </>
