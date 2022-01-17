@@ -7,6 +7,8 @@ import App from "./App";
 import "antd/dist/antd.css";
 import store from "./app/store";
 
+window.store = store;
+
 ReactDom.render(
   <Router>
     <Provider store={store}>
