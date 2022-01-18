@@ -12,12 +12,10 @@ const Cryptocurrencies = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    setCryptos(cryptosList?.data?.coins);
-
     const filterData = cryptosList?.data?.coins.filter(
-      (crypto) =>
-        crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+      (cryptoCoin) =>
+        cryptoCoin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cryptoCoin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     setCryptos(filterData);
@@ -27,12 +25,14 @@ const Cryptocurrencies = (props) => {
 
   return (
     <>
-      <div className="search-crypto">
-        <Input
-          placeholder="Search Cryptocurrency"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      {!props.simplified && (
+        <div className="search-crypto">
+          <Input
+            placeholder="Search Cryptocurrency"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      )}
       <Row gutter={[32, 32]} className="crypto-card-container">
         {cryptos?.map((currency) => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
