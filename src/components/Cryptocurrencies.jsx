@@ -22,7 +22,7 @@ const Cryptocurrencies = (props) => {
   }, [cryptosList, searchTerm]);
 
   if (isFetching) return "loading...";
-  console.log('cryptos :>> ', cryptos);
+  console.log("cryptos :>> ", cryptos);
   return (
     <>
       {!props.simplified && (
@@ -34,9 +34,10 @@ const Cryptocurrencies = (props) => {
         </div>
       )}
       <Row gutter={[32, 32]} className="crypto-card-container">
-        {cryptos?.map((currency) => (
+        {cryptos?.map((currency, id) => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
-            <Link to={`/crypto/${currency.name}`}>
+            {/* <Link to={`/crypto/${currency.name}`}> */}
+            <Link to={`/crypto/${currency.uuid}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
                 extra={<img className="crypto-image" src={currency.iconUrl} />}
