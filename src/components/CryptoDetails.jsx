@@ -26,10 +26,10 @@ const CryptoDetails = () => {
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
 
   const cryptoDetails = data?.data?.coin;
-
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
   if (isFetching) return "load";
+  console.log("cryptoDetails :>> ", cryptoDetails);
 
   const stats = [
     {
@@ -40,7 +40,9 @@ const CryptoDetails = () => {
     { title: "Rank", value: cryptoDetails.rank, icon: <NumberOutlined /> },
     {
       title: "24h Volume",
-      value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`,
+      value: `$ ${
+        cryptoDetails["24hVolume"] && millify(cryptoDetails["24hVolume"])
+      }`,
       icon: <ThunderboltOutlined />,
     },
     {
@@ -55,37 +57,37 @@ const CryptoDetails = () => {
     },
   ];
 
-  // const genericStats = [
-  //   {
-  //     title: "Number Of Markets",
-  //     value: cryptoDetails.numberOfMarkets,
-  //     icon: <FundOutlined />,
-  //   },
-  //   {
-  //     title: "Number Of Exchanges",
-  //     value: cryptoDetails.numberOfExchanges,
-  //     icon: <MoneyCollectOutlined />,
-  //   },
-  //   {
-  //     title: "Aprroved Supply",
-  //     value: cryptoDetails.approvedSupply ? (
-  //       <CheckOutlined />
-  //     ) : (
-  //       <StopOutlined />
-  //     ),
-  //     icon: <ExclamationCircleOutlined />,
-  //   },
-  //   {
-  //     title: "Total Supply",
-  //     value: `$ ${millify(cryptoDetails.totalSupply)}`,//nope
-  //     icon: <ExclamationCircleOutlined />,
-  //   },
-  //   {
-  //     title: "Circulating Supply",
-  //     value: `$ ${millify(cryptoDetails.circulatingSupply)}`,//nope
-  //     icon: <ExclamationCircleOutlined />,
-  //   },
-  // ];
+  const genericStats = [
+    {
+      title: "Number Of Markets",
+      value: cryptoDetails.numberOfMarkets,
+      icon: <FundOutlined />,
+    },
+    {
+      title: "Number Of Exchanges",
+      value: cryptoDetails.numberOfExchanges,
+      icon: <MoneyCollectOutlined />,
+    },
+    {
+      title: "Aprroved Supply",
+      value: cryptoDetails.supply.confirmed ? (
+        <CheckOutlined />
+      ) : (
+        <StopOutlined />
+      ),
+      icon: <ExclamationCircleOutlined />,
+    },
+    {
+      title: "Total Supply",
+      value: `$ ${millify(cryptoDetails.supply.total)}`,
+      icon: <ExclamationCircleOutlined />,
+    },
+    {
+      title: "Circulating Supply",
+      value: `$ ${millify(cryptoDetails.supply.circulating)}`,
+      icon: <ExclamationCircleOutlined />,
+    },
+  ];
 
   return (
     <Col className="coin-detail-container">
@@ -122,6 +124,24 @@ const CryptoDetails = () => {
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
               </Col>
+              <Text className="stats">{value}</Text>
+            </Col>
+          ))}
+        </Col>
+        <Col className="other-stats-info">
+          <Col className="coin-value-statistics-heading">
+            <Title level={3} className="coin-detailes-heading">
+              {cryptoDetails.name} Other statistic
+            </Title>
+            <p>An overview showing the stats of all cryptocurrencies</p>
+          </Col>
+          {genericStats.map(({ icon, title, value }) => (
+            <Col key={title} className="coin-stats">
+              <Col className="coin-stats-name">
+                <Text>{icon}</Text>
+                <Text>{title}</Text>
+              </Col>
+              <Text className="stats">{value}</Text>
             </Col>
           ))}
         </Col>
