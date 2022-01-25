@@ -116,7 +116,6 @@ const CryptoDetails = () => {
           <Option key={id}>{timePeriod}</Option>
         ))}
       </Select>
-      {/* line chart... */}
       <LineChart
         coinHistory={coinHistory}
         currentPrice={millify(cryptoDetails.price)}
@@ -130,8 +129,8 @@ const CryptoDetails = () => {
             </Title>
             <p>An overview showing the stats of {cryptoDetails.name}</p>
           </Col>
-          {stats.map(({ icon, title, value }) => (
-            <Col key={title} className="coin-stats">
+          {stats.map(({ icon, title, value }, id) => (
+            <Col key={id} className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -147,8 +146,8 @@ const CryptoDetails = () => {
             </Title>
             <p>An overview showing the stats of all cryptocurrencies</p>
           </Col>
-          {genericStats.map(({ icon, title, value }) => (
-            <Col key={title} className="coin-stats">
+          {genericStats.map(({ icon, title, value }, id) => (
+            <Col key={id} className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -169,8 +168,8 @@ const CryptoDetails = () => {
           <Title level={3} className="coin-details-heading">
             {cryptoDetails.name} Links
           </Title>
-          {cryptoDetails.links.map((link) => (
-            <Row className="coin-link" key={link.name}>
+          {cryptoDetails.links.map((link, id) => (
+            <Row className="coin-link" key={id}>
               <Title level={5} className="link-name">
                 {link.type}
               </Title>
