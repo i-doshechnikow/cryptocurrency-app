@@ -4,7 +4,7 @@ import { Col, Row, Typography } from "antd";
 
 const { Title } = Typography;
 
-const LineChart = () => {
+const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   return <div></div>;
 };
 
