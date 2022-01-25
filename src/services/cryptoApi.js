@@ -11,7 +11,7 @@ const createRequest = (url) => ({ url, headers: cryptoApiHeaders });
 const createRequestWithParams = (url, timePeriod) => ({
   url,
   headers: cryptoApiHeaders,
-  params: { timePeriod },
+  params: { timePeriod: timePeriod },
 });
 
 export const cryptoApi = createApi({
@@ -30,7 +30,8 @@ export const cryptoApi = createApi({
     }),
     getCryptoHistory: builder.query({
       query: ({ coinId, timePeriod }) => {
-        return createRequest(`/coin/${coinId}/history`, timePeriod);
+        console.log('timePeriod :>> ', timePeriod);
+        return createRequestWithParams(`/coin/${coinId}/history`, timePeriod);
       },
     }),
   }),
