@@ -33,7 +33,7 @@ const CryptoDetails = () => {
     timePeriod,
   });
 
-  if (isFetching) return "load";
+  if (isFetching || !coinHistory) return "load";
   const cryptoDetails = data?.data?.coin;
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -94,7 +94,7 @@ const CryptoDetails = () => {
       icon: <ExclamationCircleOutlined />,
     },
   ];
-  console.log("coinHistory :>> ", coinHistory);
+
   return (
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
