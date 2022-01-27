@@ -35,11 +35,11 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   }
 
   const data = {
-    labels: coinTimestamp,
+    labels: coinTimestamp.reverse(),
     datasets: [
       {
         label: `Price in USD`,
-        data: coinPrice,
+        data: coinPrice.reverse(),
         fill: false,
         backgroundColor: "#0071bd",
         borderColor: "#0071bd",
